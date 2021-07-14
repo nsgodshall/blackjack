@@ -1,9 +1,10 @@
 #include <iostream>
 
 #include "game.h"
-#include "player.h"
+
 
 int main() {
+
 
 	std::srand(std::time(NULL));
 	//deck longDeck;
@@ -11,7 +12,7 @@ int main() {
 	//longDeck.shuffleDeck();
 	//std::cout << "================= " << std::endl;
 	//longDeck.dump();
-	game g1(30);
+	game g1(20);
 	g1.play();
 
 }

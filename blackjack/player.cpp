@@ -1,5 +1,7 @@
 #include <ctime>
+#include <iostream>
 #include <random>
+
 #include "player.h"
 
 
@@ -18,6 +20,14 @@ bool player::addCard(card c) {
 
 player::~player()
 {}
+
+void player::dumpHand() const{
+	for (int i = 0; i < m_hand.size() - 1; i++) {
+		std::cerr << m_hand[i].suit << m_hand[i].val << ", ";
+	}
+	std::cout << m_hand.back().suit << m_hand.back().val;
+	std::cout << std::endl;
+}
 
 //RANDOM PLAYER IMPLEMENTATIONS
 randomPlayer::randomPlayer(std::string name)

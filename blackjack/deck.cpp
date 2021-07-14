@@ -19,7 +19,9 @@ deck::deck()
 	}
 }
 
-deck::deck(int shoeSize) {
+deck::deck(int shoeSize)
+	: m_nCards(0) 
+{
 	std::srand(unsigned(std::time(0)));
 
 	std::vector<char> suits = { 'S', 'C', 'H', 'D' };
@@ -44,7 +46,7 @@ bool deck::shuffleDeck() {
 
 //convert return type to bool wheter a card can be successfully drawns
 bool deck::drawCard(card &c) {
-	if (m_nCards = 0)
+	if (m_nCards == 0)
 		return false;
 
 	c = m_cards.back();

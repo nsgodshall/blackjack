@@ -12,11 +12,15 @@ class deck {
 	public:
 		deck();
 		deck(int shoeSize);
+
+		//accessors 
+		int size() const { return m_nCards; }
+
+		//mutators 
 		bool shuffleDeck();
 		bool drawCard(card &c);
 		void dump(); 
 	private: 
-		//std::vector<std::pair<char, char>> m_cards;
 		std::vector<card> m_cards;
 		int m_nCards;
 };

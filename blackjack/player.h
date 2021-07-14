@@ -16,9 +16,11 @@ class player {
 		std::string getName() const { return m_name; }
 		std::vector<card> getHand() const { return m_hand; }
 		int getPurse() const { return m_purse; }
+		void dumpHand() const;
 
 		//mutators
 		bool addCard(card c);
+		void clearHand() { m_hand.clear(); }
 		
 		virtual char makeMove() const = 0;
 	private:
