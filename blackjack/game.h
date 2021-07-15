@@ -8,19 +8,23 @@
 #include "player.h"
 #include "utilities.h"
 
-//int MIN_DECK_SIZE = 30;
-//int DEFAULT_SHOE_SIZE = 6;
+const int MIN_DECK_SIZE = 30;
+const int DEFAULT_SHOE_SIZE = 6;
 
 class game {
 	public:
 		game(int numPlayers);
 		game(int numPlaters, int shoeSize);
-		void play();
+		void playGame();
 	private:
 		void deal();
+		void playRound();
 
+		// TODO: Replace this function, this is a placeholder
+		void determineWinners();
 
 		std::vector<player*> m_allPlayers;
+		dealer m_dealer;
 		deck m_gameDeck;
 		int m_shoeSize;
 

@@ -1,3 +1,2 @@
-﻿  main.cpp
-C:\Users\nsgod\Documents\Programming\blackjack\blackjack\blackjack\main.cpp(9,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  game.cpp
   blackjack.vcxproj -> C:\Users\nsgod\Documents\Programming\blackjack\blackjack\Debug\blackjack.exe

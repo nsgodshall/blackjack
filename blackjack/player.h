@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "card.h"
+#include "utilities.h"
 
 class player {
 	public:
@@ -29,6 +30,15 @@ class player {
 		std::vector<card> m_hand;
 };
 
+
+// TODO: NOT SURE IF DEALER SHOULD BE IT'S OWN CLASS OR BE IMPLEMENTED USING MEMBER FUNCTIONS IN game
+class dealer : public player
+{
+	public:
+		dealer();
+		char makeMove() const;
+};
+
 class randomPlayer : public player
 {
 	public:
@@ -36,5 +46,14 @@ class randomPlayer : public player
 		randomPlayer(std::string name, int purse);
 		char makeMove() const;
 	
+};
+
+class standardPlayer : public player
+{
+	public:
+		standardPlayer(std::string name);
+		standardPlayer(std::string name, int purse);
+		char makeMove() const;
+
 };
 #endif //PLAYER_INCLUDED
