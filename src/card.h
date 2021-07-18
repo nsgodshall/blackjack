@@ -2,8 +2,8 @@
 #define CARD_INCLUDED
 
 struct card {
-	char val;
-	char suit;
+  char val;
+  char suit;
 };
 
-#endif //CARD_INCLUDED
+#endif // CARD_INCLUDED

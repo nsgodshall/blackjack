@@ -2,17 +2,14 @@
 
 #include "game.h"
 
-
 int main() {
 
-
-	std::srand(std::time(NULL));
-	//deck longDeck;
-	//longDeck.dump();
-	//longDeck.shuffleDeck();
-	//std::cout << "================= " << std::endl;
-	//longDeck.dump();
-	game g1(5, 0, 1, 5);
-	g1.play();
-
+  std::srand(std::time(NULL));
+  // deck longDeck;
+  // longDeck.dump();
+  // longDeck.shuffleDeck();
+  // std::cout << "================= " << std::endl;
+  // longDeck.dump();
+  game g1(5, 0, 1, 5);
+  g1.play();
 }

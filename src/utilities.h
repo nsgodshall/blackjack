@@ -8,8 +8,8 @@
 const int MIN_BET = 10;
 const int MAX_BET = 200;
 
-int getCardVal(const card& c);
+int getCardVal(const card &c);
 
-int getHandVal(const std::vector<card>& hand);
+int getHandVal(const std::vector<card> &hand);
 
-#endif //UTILITIES_INCLUDED
+#endif // UTILITIES_INCLUDED
