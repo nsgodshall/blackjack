@@ -22,6 +22,8 @@ class player {
 		//mutators
 		bool addCard(card c);
 		void clearHand() { m_hand.clear(); }
+		void addMoney(int amt) { m_purse += amt; }
+		void removeMoney(int amt) { m_purse -= amt; }
 
 		virtual char makeMove() const { return 's'; }
 		virtual char makeMove(card& d) const { return 's'; }

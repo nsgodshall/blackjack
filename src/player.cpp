@@ -7,7 +7,7 @@
 
 
 player::player(std::string name)
-	: m_name(name), m_purse(100)
+	: m_name(name), m_purse(1000)
 {}
 
 player::player(std::string name, int purse)
@@ -72,6 +72,8 @@ int humanPlayer::makeWager() {
 		std::cout << "bet: ";
 		std::cin >> wager;
 	} 
+	removeMoney(wager);
+	return wager; 
 }
 
 //RANDOM PLAYER IMPLEMENTATIONS
@@ -90,9 +92,9 @@ char randomPlayer::makeMove(card& d) const {
 		return 's';
 }
 
-int player::makeWager() {
+int randomPlayer::makeWager() {
 	int wager = MIN_BET + (std::rand() % (MAX_BET - MIN_BET));
-	m_purse -= wager;
+	removeMoney(wager);
 	return wager;
 }
 
@@ -118,8 +120,8 @@ char standardPlayer::makeMove(card& d) const {
 	return 'h';
 }
 
-int player::makeWager() {
+int standardPlayer::makeWager() {
 	int wager = MIN_BET + 10;
-	m_purse -= wager;
+	removeMoney(wager);
 	return wager;
 }

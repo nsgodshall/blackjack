@@ -16,7 +16,7 @@ int getHandVal(const std::vector<card>& hand) {
 		if (it->val >= 50 && it->val <= 57) 
 			sum += it->val - 48;
 		else if (it->val == 'A') {
-			if (sum >= 12) {
+			if (sum >= 11) {
 				sum += 1;
 			}
 			sum += 11;
