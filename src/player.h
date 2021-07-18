@@ -22,8 +22,9 @@ class player {
 		//mutators
 		bool addCard(card c);
 		void clearHand() { m_hand.clear(); }
-		
-		virtual char makeMove() const = 0;
+
+		virtual char makeMove() const { return 's'; }
+		virtual char makeMove(card& d) const { return 's'; }
 	private:
 		std::string m_name;
 		int m_purse;
@@ -36,7 +37,15 @@ class dealer : public player
 {
 	public:
 		dealer();
-		char makeMove() const;
+		virtual char makeMove() const;
+};
+
+class humanPlayer : public player
+{
+	public: 
+		humanPlayer(std::string name);
+		humanPlayer(std::string name, int purse);
+		virtual char makeMove(card& d) const;
 };
 
 class randomPlayer : public player
@@ -44,7 +53,7 @@ class randomPlayer : public player
 	public:
 		randomPlayer(std::string name);
 		randomPlayer(std::string name, int purse);
-		char makeMove() const;
+		virtual char makeMove(card& d) const;
 	
 };
 
@@ -53,7 +62,8 @@ class standardPlayer : public player
 	public:
 		standardPlayer(std::string name);
 		standardPlayer(std::string name, int purse);
-		char makeMove() const;
+		virtual char makeMove(card& d) const;
+
 
 };
 #endif //PLAYER_INCLUDED

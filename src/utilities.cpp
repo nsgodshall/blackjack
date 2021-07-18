@@ -1,5 +1,14 @@
 #include "utilities.h"
 
+int getCardVal(const card& c) {
+	if (c.val >= 50 && c.val <= 57)
+		return c.val - 48;
+	if (c.val == 'A')
+		return 0;
+	else
+		return 10;
+}
+
 int getHandVal(const std::vector<card>& hand) {
 	int sum(0);
 	std::vector<card>::const_iterator it;

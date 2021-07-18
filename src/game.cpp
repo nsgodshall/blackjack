@@ -10,7 +10,11 @@ game::game(int numPlayers)
 		std::cout << "Enter the name of player " << i + 1  << ": ";
 		std::cin >> namePlaceHolder;
 
-		if (i < numPlayers / 2)
+		if (i == 0) {
+			m_allPlayers.push_back(new humanPlayer(namePlaceHolder));
+			std::cout << "FUCK";
+		}
+		else if (i == 1)
 			m_allPlayers.push_back(new standardPlayer(namePlaceHolder));
 		else
 			m_allPlayers.push_back(new randomPlayer(namePlaceHolder));
@@ -39,7 +43,7 @@ void game::playGame() {
 	if (m_gameDeck.size() < MIN_DECK_SIZE) {
 		m_gameDeck = deck(m_shoeSize);
 	}
-	std::cout << "====== DEAL ======" << std::endl;
+	std::cout << std::endl << "====== DEAL ======" << std::endl;
 	deal();
 	std::cout << "DEALER: " << "XX, " << m_dealer.getHand().back().suit << m_dealer.getHand().back().val << std::endl;
 
@@ -48,7 +52,7 @@ void game::playGame() {
 		p->dumpHand();
 		std::cout << std::endl;
 	}
-	std::cout << "=== BEGIN PLAY ===" << std::endl;
+	std::cout << std:: endl << "=== BEGIN PLAY ===" << std::endl;
 	playRound();
 	determineWinners();
 }
@@ -74,13 +78,13 @@ void game::deal() {
 void game::playRound() {
 	card c;
 	for (player* p : m_allPlayers) {
-		std::cout << p->getName() << "'s turn: " << std::endl;
+		std::cout << std::endl << p->getName() << "'s turn: " << std::endl;
 		std::cout << "HAND: ";
 		p->dumpHand();
 		std::cerr << " (Val is: " << getHandVal(p->getHand()) << ")";
 		std::cout << std::endl; 
 		
-		while (p->makeMove() == 'h') {
+		while (p->makeMove(m_dealer.getHand().back()) == 'h') {
 			std::cout << "HIT!" << std::endl;
 			std::cout << "HAND: ";
 			m_gameDeck.drawCard(c);

@@ -1,6 +1,7 @@
 #include <ctime>
 #include <iostream>
 #include <random>
+#include <set>
 
 #include "player.h"
 
@@ -40,6 +41,25 @@ char dealer::makeMove() const {
 	return 'h';
 }
 
+//HUMAN PLAYER IMPLEMENTATIONS
+humanPlayer::humanPlayer(std::string name)
+	: player(name)
+{}
+
+humanPlayer::humanPlayer(std::string name, int purse)
+	: player(name, purse)
+{}
+
+char humanPlayer::makeMove(card& d) const {
+	char i = 'x';
+	std::cout << "WHAT";
+	while (tolower(i) != 's' && tolower(i) != 'h') {
+		std::cout << std::endl << "CHOOSE MOVE: ";
+		std::cin >> i; 
+	}
+	return tolower(i);
+}
+
 //RANDOM PLAYER IMPLEMENTATIONS
 randomPlayer::randomPlayer(std::string name)
 	: player(name)
@@ -49,7 +69,7 @@ randomPlayer::randomPlayer(std::string name, int purse)
 	: player(name, purse)
 {}
 
-char randomPlayer::makeMove() const {
+char randomPlayer::makeMove(card& d) const {
 	if (std::rand() % 2 > 0.5)
 		return 'h';
 	else
@@ -65,8 +85,15 @@ standardPlayer::standardPlayer(std::string name, int purse)
 	: player(name, purse)
 {}
 
-char standardPlayer::makeMove() const {
-	if (getHandVal(getHand()) >= 17 || getHandVal(getHand()) == -1)
-		return 's';
+char standardPlayer::makeMove(card& d) const {
+	//If the dealer is showing 
+	if (getCardVal(d) == 10 || getCardVal(d) == 0) {
+		if (getHandVal(getHand()) >= 17 || getHandVal(getHand()) == -1)
+			return 's';
+	}
+	else {
+		if (getHandVal(getHand()) >= 12 || getHandVal(getHand()) == -1)
+			return 's';
+	}
 	return 'h';
 }
