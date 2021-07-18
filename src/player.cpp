@@ -29,6 +29,12 @@ void player::dumpHand() const{
 	std::cout << m_hand.back().suit << m_hand.back().val;
 }
 
+int player::makeWager() {
+	int wager = MIN_BET;
+	m_purse -= wager;
+	return wager;
+}
+
 //DEALER IMPLEMENTATIONS
 
 dealer::dealer()
@@ -60,6 +66,14 @@ char humanPlayer::makeMove(card& d) const {
 	return tolower(i);
 }
 
+int humanPlayer::makeWager() {
+	int wager = -1;
+	while (wager < MIN_BET || wager > MAX_BET){
+		std::cout << "bet: ";
+		std::cin >> wager;
+	} 
+}
+
 //RANDOM PLAYER IMPLEMENTATIONS
 randomPlayer::randomPlayer(std::string name)
 	: player(name)
@@ -74,6 +88,12 @@ char randomPlayer::makeMove(card& d) const {
 		return 'h';
 	else
 		return 's';
+}
+
+int player::makeWager() {
+	int wager = MIN_BET + (std::rand() % (MAX_BET - MIN_BET));
+	m_purse -= wager;
+	return wager;
 }
 
 // STANDARD PLAYER IMPLEMENTATIONS
@@ -96,4 +116,10 @@ char standardPlayer::makeMove(card& d) const {
 			return 's';
 	}
 	return 'h';
+}
+
+int player::makeWager() {
+	int wager = MIN_BET + 10;
+	m_purse -= wager;
+	return wager;
 }

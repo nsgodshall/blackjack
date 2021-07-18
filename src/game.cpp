@@ -114,6 +114,12 @@ void game::playRound() {
 	}
 }
 
+void game::setWagers() {
+	for (player* p : m_allPlayers) {
+		p->makeWager();
+	}
+}
+
 void game::determineWinners() {
 	std::vector<std::string> winners;
 	std::vector<std::string> losers;

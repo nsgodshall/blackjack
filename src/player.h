@@ -25,6 +25,7 @@ class player {
 
 		virtual char makeMove() const { return 's'; }
 		virtual char makeMove(card& d) const { return 's'; }
+		virtual int makeWager();
 	private:
 		std::string m_name;
 		int m_purse;
@@ -46,6 +47,7 @@ class humanPlayer : public player
 		humanPlayer(std::string name);
 		humanPlayer(std::string name, int purse);
 		virtual char makeMove(card& d) const;
+		virtual int makeWager();
 };
 
 class randomPlayer : public player
@@ -54,6 +56,7 @@ class randomPlayer : public player
 		randomPlayer(std::string name);
 		randomPlayer(std::string name, int purse);
 		virtual char makeMove(card& d) const;
+		virtual int makeWager();
 	
 };
 
@@ -63,7 +66,7 @@ class standardPlayer : public player
 		standardPlayer(std::string name);
 		standardPlayer(std::string name, int purse);
 		virtual char makeMove(card& d) const;
-
+		virtual int makeWager(); 
 
 };
 #endif //PLAYER_INCLUDED

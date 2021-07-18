@@ -10,6 +10,8 @@
 
 const int MIN_DECK_SIZE = 30;
 const int DEFAULT_SHOE_SIZE = 6;
+const int MIN_BET = 10;
+const int MAX_BET = 200;
 
 class game {
 	public:
@@ -18,6 +20,7 @@ class game {
 		void playGame();
 	private:
 		void deal();
+		void setWagers();
 		void playRound();
 
 		// TODO: Replace this function, this is a placeholder

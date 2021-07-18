@@ -5,6 +5,9 @@
 
 #include "card.h"
 
+const int MIN_BET = 10;
+const int MAX_BET = 200;
+
 int getCardVal(const card& c);
 
 int getHandVal(const std::vector<card>& hand);
