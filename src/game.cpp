@@ -1,25 +1,31 @@
 #include "game.h"
 
-game::game(int nRandom, int nStandard, int nHuman)
+game::game(int nStandard, int nHuman, int nRandom, int nNaive)
 	: m_gameDeck(DEFAULT_SHOE_SIZE), m_shoeSize(DEFAULT_SHOE_SIZE)
 {
 	//initialize all of the players
 	std::string namePlaceHolder;
 
-	for (int i = 0; i < nRandom; i++) {
-		std::cout << "Enter the name of player " << m_allPlayers.size() + 1 << ": ";
-		std::cin >> namePlaceHolder;
-		m_allPlayers.push_back(new randomPlayer(namePlaceHolder));
-	}
+
 	for (int i = 0; i < nStandard; i++) {
-		std::cout << "Enter the name of player " << m_allPlayers.size() + 1 << ": ";
+		std::cout << "Enter the name of (Standard) player " << m_allPlayers.size() + 1 << ": ";
 		std::cin >> namePlaceHolder;
 		m_allPlayers.push_back(new standardPlayer(namePlaceHolder));
 	}
 	for (int i = 0; i < nHuman; i++) {
-		std::cout << "Enter the name of player " << m_allPlayers.size() + 1 << ": ";
+		std::cout << "Enter the name of (human) player " << m_allPlayers.size() + 1 << ": ";
 		std::cin >> namePlaceHolder;
 		m_allPlayers.push_back(new humanPlayer(namePlaceHolder));
+	}
+	for (int i = 0; i < nRandom; i++) {
+		std::cout << "Enter the name of (random) player " << m_allPlayers.size() + 1 << ": ";
+		std::cin >> namePlaceHolder;
+		m_allPlayers.push_back(new randomPlayer(namePlaceHolder));
+	}
+	for (int i = 0; i < nNaive; i++) {
+		std::cout << "Enter the name of (naive) player " << m_allPlayers.size() + 1 << ": ";
+		std::cin >> namePlaceHolder;
+		m_allPlayers.push_back(new naivePlayer(namePlaceHolder));
 	}
 	//shuffle the deck
 	m_gameDeck.shuffleDeck();
@@ -43,8 +49,8 @@ game::game(int numPlayers, int shoeSize)
 
 
 void game::play(){
-	for (int i = 0; i < 100; i++){
-		manageRoundVerbose();
+	for (int i = 0; i < 1000; i++){
+		manageRound();
 	}
 }
 

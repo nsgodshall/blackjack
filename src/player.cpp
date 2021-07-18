@@ -120,7 +120,28 @@ char standardPlayer::makeMove(card& d) const {
 }
 
 int standardPlayer::makeWager() {
-	int wager = MIN_BET + 10;
+	int wager = MIN_BET*2;
+	removeMoney(wager);
+	return wager;
+}
+
+// NAIVE PLAYER IMPLEMENTATIONS
+naivePlayer::naivePlayer(std::string name)
+	: player(name)
+{}
+
+naivePlayer::naivePlayer(std::string name, int purse)
+	: player(name, purse)
+{}
+
+char naivePlayer::makeMove(card& d) const {
+	if (getHandVal(getHand()) >= 17 || getHandVal(getHand()) == -1)
+		return 's';
+	return 'h';
+}
+
+int naivePlayer::makeWager() {
+	int wager = MIN_BET*2;
 	removeMoney(wager);
 	return wager;
 }

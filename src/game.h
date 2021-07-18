@@ -15,7 +15,7 @@ const int DEFAULT_SHOE_SIZE = 6;
 
 class game {
 	public:
-		game(int nRandom, int nStandard, int nHuman);
+		game(int nStandard, int nHuman, int nRandom, int nNaive);
 		game(int numPlaters, int shoeSize);
 		void play();
 	private:

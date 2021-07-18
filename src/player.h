@@ -71,4 +71,13 @@ class standardPlayer : public player
 		virtual int makeWager(); 
 
 };
+
+class naivePlayer : public player
+{
+	public:
+		naivePlayer(std::string name);
+		naivePlayer(std::string name, int purse);
+		virtual char makeMove(card& d) const;
+		virtual int makeWager(); 
+};
 #endif //PLAYER_INCLUDED
