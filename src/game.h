@@ -15,13 +15,16 @@ const int DEFAULT_SHOE_SIZE = 6;
 
 class game {
 	public:
-		game(int numPlayers);
+		game(int nRandom, int nStandard, int nHuman);
 		game(int numPlaters, int shoeSize);
-		void playGame();
+		void play();
 	private:
 		void deal();
 		void setWagers();
+		void manageRound();
+		void manageRoundVerbose();
 		void playRound();
+		void playRoundVerbose();
 
 		// TODO: Replace this function, this is a placeholder
 		void settleUp();

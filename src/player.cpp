@@ -58,7 +58,6 @@ humanPlayer::humanPlayer(std::string name, int purse)
 
 char humanPlayer::makeMove(card& d) const {
 	char i = 'x';
-	std::cout << "WHAT";
 	while (tolower(i) != 's' && tolower(i) != 'h') {
 		std::cout << std::endl << "CHOOSE MOVE: ";
 		std::cin >> i; 
@@ -69,7 +68,7 @@ char humanPlayer::makeMove(card& d) const {
 int humanPlayer::makeWager() {
 	int wager = -1;
 	while (wager < MIN_BET || wager > MAX_BET){
-		std::cout << "bet: ";
+		std::cout << std::endl << "bet: ";
 		std::cin >> wager;
 	} 
 	removeMoney(wager);
