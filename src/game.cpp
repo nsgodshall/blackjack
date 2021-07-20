@@ -49,22 +49,100 @@ game::game(int numPlayers, int shoeSize)
 }
 
 void game::play() {
-  for (int i = 0; i < 1000; i++) {
+  for (int i = 0; i < 100; i++) {
     manageRound();
   }
+  //std::cerr << m_allPlayers[0]->getPurse() << " " << m_allPlayers[1]->getPurse();
 }
 
 void game::manageRound() {
   if (m_gameDeck.size() < MIN_DECK_SIZE) {
-    std::cout << "SHUFFLING" << std::endl;
     m_gameDeck = deck(m_shoeSize);
   }
   setWagers();
   deal();
-
   playRound();
   settleUp();
 }
+
+void game::setWagers() {
+  for (player *p : m_allPlayers) {
+    int wager = p->makeWager();
+    // std::cerr << p->getName() << ": $" << wager << std::endl;
+    m_wagers[p] = wager;
+  }
+}
+
+void game::deal() {
+  card c;
+  m_dealer.clearHand();
+  for (int i = 0; i < 2; i++) {
+    m_gameDeck.drawCard(c);
+    m_dealer.addCard(c);
+  }
+
+  for (player *p : m_allPlayers) {
+    p->clearHand();
+    for (int j = 0; j < 2; j++) {
+      m_gameDeck.drawCard(c);
+      p->addCard(c);
+    }
+  }
+}
+
+void game::playRound() {
+  card c;
+  for (player *p : m_allPlayers) {
+
+    while (p->makeMove(m_dealer.getHand().back()) == 'h') {
+      m_gameDeck.drawCard(c);
+      p->addCard(c);
+      if (getHandVal(p->getHand()) == -1) {
+        break;
+      }
+    }
+    if (getHandVal(p->getHand()) != -1) {
+    }
+  }
+
+  while (m_dealer.makeMove() == 'h') {
+    m_gameDeck.drawCard(c);
+    m_dealer.addCard(c);
+  }
+}
+
+void game::settleUp() {
+  std::vector<player *> winners;
+  std::vector<player *> losers;
+  std::vector<player *> ties;
+  int dealerVal = getHandVal(m_dealer.getHand());
+
+  // dealer busted
+  if (dealerVal == -1) {
+    for (player *p : m_allPlayers) {
+      // If player has not busted but the dealer has, they are a winner
+      if (getHandVal(p->getHand()) != -1)
+        p->addMoney(2 * m_wagers[p]);
+      // If the player busts, they are a loser
+    }
+  } else {
+    for (player *p : m_allPlayers) {
+      int pHand = getHandVal(p->getHand());
+      if (pHand > dealerVal)
+        p->addMoney(2 * m_wagers[p]);
+      else if (pHand == dealerVal)
+        p->addMoney(m_wagers[p]);
+    }
+  }
+
+  // reset wagers
+  std::map<player *, int>::iterator it;
+  for (it = m_wagers.begin(); it != m_wagers.end(); it++) {
+    it->second = 0;
+  }
+}
+
+// VERBOSE FUNCTIONS
 
 void game::manageRoundVerbose() {
   if (m_gameDeck.size() < MIN_DECK_SIZE) {
@@ -86,32 +164,7 @@ void game::manageRoundVerbose() {
   }
   std::cout << std::endl << "=== BEGIN PLAY ===" << std::endl;
   playRoundVerbose();
-  settleUp();
-}
-
-void game::deal() {
-  card c;
-  m_dealer.clearHand();
-  for (int i = 0; i < 2; i++) {
-    m_gameDeck.drawCard(c);
-    m_dealer.addCard(c);
-  }
-
-  for (player *p : m_allPlayers) {
-    p->clearHand();
-    for (int j = 0; j < 2; j++) {
-      m_gameDeck.drawCard(c);
-      p->addCard(c);
-    }
-  }
-}
-
-void game::setWagers() {
-  for (player *p : m_allPlayers) {
-    int wager = p->makeWager();
-    // std::cerr << p->getName() << ": $" << wager << std::endl;
-    m_wagers[p] = wager;
-  }
+  settleUpVerbose();
 }
 
 void game::playRoundVerbose() {
@@ -153,28 +206,7 @@ void game::playRoundVerbose() {
   }
 }
 
-void game::playRound() {
-  card c;
-  for (player *p : m_allPlayers) {
-
-    while (p->makeMove(m_dealer.getHand().back()) == 'h') {
-      m_gameDeck.drawCard(c);
-      p->addCard(c);
-      if (getHandVal(p->getHand()) == -1) {
-        break;
-      }
-    }
-    if (getHandVal(p->getHand()) != -1) {
-    }
-  }
-
-  while (m_dealer.makeMove() == 'h') {
-    m_gameDeck.drawCard(c);
-    m_dealer.addCard(c);
-  }
-}
-
-void game::settleUp() {
+void game::settleUpVerbose() {
   std::vector<player *> winners;
   std::vector<player *> losers;
   std::vector<player *> ties;

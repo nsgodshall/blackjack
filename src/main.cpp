@@ -10,6 +10,6 @@ int main() {
   // longDeck.shuffleDeck();
   // std::cout << "================= " << std::endl;
   // longDeck.dump();
-  game g1(5, 0, 1, 5);
+  game g1(1,0,0,1);
   g1.play();
 }

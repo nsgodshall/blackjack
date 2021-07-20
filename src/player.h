@@ -35,8 +35,6 @@ private:
   std::vector<card> m_hand;
 };
 
-// TODO: NOT SURE IF DEALER SHOULD BE IT'S OWN CLASS OR BE IMPLEMENTED USING
-// MEMBER FUNCTIONS IN game
 class dealer : public player {
 public:
   dealer();

@@ -22,9 +22,12 @@ private:
   void deal();
   void setWagers();
   void manageRound();
-  void manageRoundVerbose();
   void playRound();
+  
+  // felt cute, might delete later idk
+  void manageRoundVerbose();
   void playRoundVerbose();
+  void settleUpVerbose();
 
   // TODO: Replace this function, this is a placeholder
   void settleUp();
