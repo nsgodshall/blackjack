@@ -63,6 +63,19 @@ int humanPlayer::makeWager() {
   return wager;
 }
 
+bool humanPlayer::splitQuery() const {
+  std::cout << std::endl;
+  char input('x');
+  while (input != 'y' && input != 'n'){
+    std::cout << "Split? (y/n): ";
+    std::cin >> input;
+    input = tolower(input);
+  }
+  if (input == 'y')
+    return true;
+  return false;
+}
+
 // RANDOM PLAYER IMPLEMENTATIONS
 randomPlayer::randomPlayer(std::string name) : player(name) {}
 
@@ -79,6 +92,10 @@ int randomPlayer::makeWager() {
   int wager = MIN_BET + (std::rand() % (MAX_BET - MIN_BET));
   removeMoney(wager);
   return wager;
+}
+
+bool randomPlayer::splitQuery() const {
+  if (std::rand() % 2 > 0.5 )
 }
 
 // STANDARD PLAYER IMPLEMENTATIONS
@@ -104,6 +121,7 @@ int standardPlayer::makeWager() {
   removeMoney(wager);
   return wager;
 }
+
 
 // NAIVE PLAYER IMPLEMENTATIONS
 naivePlayer::naivePlayer(std::string name) : player(name) {}

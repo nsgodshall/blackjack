@@ -28,6 +28,7 @@ public:
   virtual char makeMove() const { return 's'; }
   virtual char makeMove(card &d) const { return 's'; }
   virtual int makeWager();
+  virtual bool splitQuery() const { return false; } 
 
 private:
   std::string m_name;
@@ -47,6 +48,7 @@ public:
   humanPlayer(std::string name, int purse);
   virtual char makeMove(card &d) const;
   virtual int makeWager();
+  virtual bool splitQuery() const;
 };
 
 class randomPlayer : public player {
@@ -55,6 +57,7 @@ public:
   randomPlayer(std::string name, int purse);
   virtual char makeMove(card &d) const;
   virtual int makeWager();
+  virtual bool splitQuery() const;
 };
 
 class standardPlayer : public player {
@@ -63,6 +66,7 @@ public:
   standardPlayer(std::string name, int purse);
   virtual char makeMove(card &d) const;
   virtual int makeWager();
+  virtual bool splitQuery() const;
 };
 
 class naivePlayer : public player {
@@ -71,5 +75,6 @@ public:
   naivePlayer(std::string name, int purse);
   virtual char makeMove(card &d) const;
   virtual int makeWager();
+  virtual bool splitQuery() const;
 };
 #endif // PLAYER_INCLUDED

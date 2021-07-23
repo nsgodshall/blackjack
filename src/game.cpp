@@ -93,7 +93,10 @@ void game::deal() {
 void game::playRound() {
   card c;
   for (player *p : m_allPlayers) {
-
+    //check if player can split
+    if (p->getHand().front().val == p->getHand().back().val){
+      
+    }
     while (p->makeMove(m_dealer.getHand().back()) == 'h') {
       m_gameDeck.drawCard(c);
       p->addCard(c);
