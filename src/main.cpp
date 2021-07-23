@@ -19,6 +19,9 @@ void testHandVal(){
   p.addCard(c);
   assert(getHandVal(p.getHand()) == 13);
 
+  c.val = '8';
+  p.addCard(c);
+  assert(getHandVal(p.getHand()) == 21);
 }
 
 int main() {
