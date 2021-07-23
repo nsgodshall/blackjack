@@ -23,11 +23,13 @@ private:
   void setWagers();
   void manageRound();
   void playRound();
+  void playHand(player* p);
   
   // felt cute, might delete later idk
   void manageRoundVerbose();
   void playRoundVerbose();
   void settleUpVerbose();
+  void playHandVerbose(player* p);
 
   // TODO: Replace this function, this is a placeholder
   void settleUp();

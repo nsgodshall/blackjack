@@ -49,8 +49,8 @@ game::game(int numPlayers, int shoeSize)
 }
 
 void game::play() {
-  for (int i = 0; i < 100; i++) {
-    manageRound();
+  for (int i = 0; i < 10; i++) {
+    manageRoundVerbose();
   }
   //std::cerr << m_allPlayers[0]->getPurse() << " " << m_allPlayers[1]->getPurse();
 }
@@ -93,24 +93,37 @@ void game::deal() {
 void game::playRound() {
   card c;
   for (player *p : m_allPlayers) {
-    //check if player can split
-    if (p->getHand().front().val == p->getHand().back().val){
-      
-    }
-    while (p->makeMove(m_dealer.getHand().back()) == 'h') {
+        //check if player can split
+    if (p->getHand().front().val == p->getHand().back().val && p->splitQuery()){
+      std::cerr << "split!" << std::endl;
+      std::vector<card> oldHand = p->getHand();
+      p->clearHand();
+      p->addCard(oldHand.front());
       m_gameDeck.drawCard(c);
       p->addCard(c);
-      if (getHandVal(p->getHand()) == -1) {
-        break;
-      }
+      playHand(p);
+      p->clearHand();
+      p->addCard(oldHand.back());
+      m_gameDeck.drawCard(c);
+      p->addCard(c);      
     }
-    if (getHandVal(p->getHand()) != -1) {
-    }
+    playHand(p);
   }
 
   while (m_dealer.makeMove() == 'h') {
     m_gameDeck.drawCard(c);
     m_dealer.addCard(c);
+  }
+}
+
+void game::playHand(player* p){
+  card c;
+  while (p->makeMove(m_dealer.getHand().back()) == 'h') {
+    m_gameDeck.drawCard(c);
+    p->addCard(c);
+    if (getHandVal(p->getHand()) == -1) {
+      break;
+    }
   }
 }
 
@@ -178,23 +191,21 @@ void game::playRoundVerbose() {
     p->dumpHand();
     std::cerr << " (Val is: " << getHandVal(p->getHand()) << ")";
     std::cout << std::endl;
-
-    while (p->makeMove(m_dealer.getHand().back()) == 'h') {
-      std::cout << "HIT!" << std::endl;
-      std::cout << "HAND: ";
+    if (p->getHand().front().val == p->getHand().back().val && p->splitQuery()){
+      std::cerr << "split!" << std::endl;
+      std::vector<card> oldHand = p->getHand();
+      p->clearHand();
+      p->addCard(oldHand.front());
       m_gameDeck.drawCard(c);
       p->addCard(c);
-      p->dumpHand();
-      std::cerr << " (Val is: " << getHandVal(p->getHand()) << " )";
-      std::cout << std::endl;
-      if (getHandVal(p->getHand()) == -1) {
-        std::cout << "BUST!" << std::endl;
-        break;
-      }
+      playHand(p);
+      p->clearHand();
+      p->addCard(oldHand.back());
+      m_gameDeck.drawCard(c);
+      p->addCard(c);      
     }
-    if (getHandVal(p->getHand()) != -1) {
-      std::cout << "STAY!" << std::endl;
-    }
+    playHand(p);
+
   }
 
   std::cout << "DEALER: ";
@@ -207,6 +218,26 @@ void game::playRoundVerbose() {
     m_dealer.dumpHand();
     std::cout << std::endl;
   }
+}
+
+void game::playHandVerbose(player* p){
+  card c;
+  while (p->makeMove(m_dealer.getHand().back()) == 'h') {
+  std::cout << "HIT!" << std::endl;
+  std::cout << "HAND: ";
+  m_gameDeck.drawCard(c);
+  p->addCard(c);
+  p->dumpHand();
+  std::cerr << " (Val is: " << getHandVal(p->getHand()) << " )";
+  std::cout << std::endl;
+  if (getHandVal(p->getHand()) == -1) {
+    std::cout << "BUST!" << std::endl;
+    break;
+  }
+}
+if (getHandVal(p->getHand()) != -1) {
+  std::cout << "STAY!" << std::endl;
+}
 }
 
 void game::settleUpVerbose() {

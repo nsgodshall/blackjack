@@ -25,5 +25,6 @@ void testHandVal(){
 }
 
 int main() {
-  testHandVal();
+  game g1(3,0,0,0);
+  g1.play();
 }

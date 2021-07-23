@@ -94,8 +94,10 @@ int randomPlayer::makeWager() {
   return wager;
 }
 
+
+// TODO: implement random player split query
 bool randomPlayer::splitQuery() const {
-  if (std::rand() % 2 > 0.5 )
+  return false;
 }
 
 // STANDARD PLAYER IMPLEMENTATIONS
@@ -122,6 +124,10 @@ int standardPlayer::makeWager() {
   return wager;
 }
 
+bool standardPlayer::splitQuery() const {
+  return true;
+}
+
 
 // NAIVE PLAYER IMPLEMENTATIONS
 naivePlayer::naivePlayer(std::string name) : player(name) {}
@@ -138,4 +144,8 @@ int naivePlayer::makeWager() {
   int wager = MIN_BET * 2;
   removeMoney(wager);
   return wager;
+}
+
+bool naivePlayer::splitQuery() const {
+  return true;
 }
