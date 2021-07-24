@@ -1,6 +1,7 @@
 #ifndef GAME_INCLUDED
 #define GAME_INCLUDED
 
+#include <list>
 #include <map>
 #include <string>
 #include <vector>
@@ -21,19 +22,20 @@ public:
 private:
   void deal();
   void setWagers();
-  void manageRound();
-  void playRound();
-  void playHand(player* p);
+  // void manageRound();
+  // void playRound();
+  // void playHand(player* p);
   
   // felt cute, might delete later idk
   void manageRoundVerbose();
+  void setWagersVerbose();
   void playRoundVerbose();
   void settleUpVerbose();
   void playHandVerbose(player* p);
 
   // TODO: Replace this function, this is a placeholder
   void settleUp();
-  std::vector<player *> m_allPlayers;
+  std::vector<player*> m_allPlayers;
   std::map<player *, int> m_wagers;
   dealer m_dealer;
   deck m_gameDeck;

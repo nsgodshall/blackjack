@@ -3,26 +3,26 @@
 
 #include "game.h"
 
-void testHandVal(){
-  card c;
-  c.suit = 'S';
-  c.val = 'J';
+// void testHandVal(){
+//   card c;
+//   c.suit = 'S';
+//   c.val = 'J';
 
-  player p("debug");
-  p.addCard(c);
+//   player p("debug");
+//   p.addCard(c);
 
-  c.val = 'A';
-  p.addCard(c);
+//   c.val = 'A';
+//   p.addCard(c);
 
-  assert(getHandVal(p.getHand()) == 0);
-  c.val = '2';
-  p.addCard(c);
-  assert(getHandVal(p.getHand()) == 13);
+//   assert(getHandVal(p.getHand()) == 0);
+//   c.val = '2';
+//   p.addCard(c);
+//   assert(getHandVal(p.getHand()) == 13);
 
-  c.val = '8';
-  p.addCard(c);
-  assert(getHandVal(p.getHand()) == 21);
-}
+//   c.val = '8';
+//   p.addCard(c);
+//   assert(getHandVal(p.getHand()) == 21);
+// }
 
 int main() {
   game g1(3,0,0,0);

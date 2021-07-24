@@ -5,12 +5,18 @@
 
 #include "player.h"
 
-player::player(std::string name) : m_name(name), m_purse(1000) {}
+player::player(std::string name) : m_name(name), m_purse(1000) 
+{
+  m_hand.push_back({});
+}
 
-player::player(std::string name, int purse) : m_name(name), m_purse(purse) {}
+player::player(std::string name, int purse) : m_name(name), m_purse(purse) 
+{
+  m_hand.push_back({});
+}
 
 bool player::addCard(card c) {
-  m_hand.push_back(c);
+  m_hand.back().push_back(c);
   return true;
 }
 
@@ -18,9 +24,9 @@ player::~player() {}
 
 void player::dumpHand() const {
   for (int i = 0; i < m_hand.size() - 1; i++) {
-    std::cerr << m_hand[i].suit << m_hand[i].val << ", ";
+    std::cerr << m_hand.back()[i].suit << m_hand.back()[i].val << ", ";
   }
-  std::cout << m_hand.back().suit << m_hand.back().val;
+  std::cout << m_hand.back().back().suit << m_hand.back().back().val;
 }
 
 int player::makeWager() {
@@ -34,7 +40,7 @@ int player::makeWager() {
 dealer::dealer() : player("dealer") {}
 
 char dealer::makeMove() const {
-  if (getHandVal(getHand()) >= 17 || getHandVal(getHand()) == -1)
+  if (getHandVal(getHand().back()) >= 17 || getHandVal(getHand().back()) == -1)
     return 's';
   return 'h';
 }
@@ -109,10 +115,10 @@ standardPlayer::standardPlayer(std::string name, int purse)
 char standardPlayer::makeMove(card &d) const {
   // If the dealer is showing
   if (getCardVal(d) == 10 || getCardVal(d) == 0) {
-    if (getHandVal(getHand()) >= 17 || getHandVal(getHand()) == -1)
+    if (getHandVal(getHand().back()) >= 17 || getHandVal(getHand().back()) == -1)
       return 's';
   } else {
-    if (getHandVal(getHand()) >= 12 || getHandVal(getHand()) == -1)
+    if (getHandVal(getHand().back()) >= 12 || getHandVal(getHand().back()) == -1)
       return 's';
   }
   return 'h';
@@ -135,7 +141,7 @@ naivePlayer::naivePlayer(std::string name) : player(name) {}
 naivePlayer::naivePlayer(std::string name, int purse) : player(name, purse) {}
 
 char naivePlayer::makeMove(card &d) const {
-  if (getHandVal(getHand()) >= 17 || getHandVal(getHand()) == -1)
+  if (getHandVal(getHand().back()) >= 17 || getHandVal(getHand().back()) == -1)
     return 's';
   return 'h';
 }

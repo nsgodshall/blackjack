@@ -1,6 +1,0 @@
-* add split mechanic*  add double down mechanic
-4. Implement smart player
-    i. enable perfect play
-    ii. enable card counting
-5. implement ability for Game to relay a shoe shuffle to players (important for card counting)
-6. Plot results (using python maybe?)

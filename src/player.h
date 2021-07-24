@@ -1,6 +1,7 @@
 #ifndef PLAYER_INCLUDED
 #define PLAYER_INCLUDED
 
+#include <list>
 #include <string>
 #include <vector>
 
@@ -15,7 +16,7 @@ public:
 
   // accessors
   std::string getName() const { return m_name; }
-  std::vector<card> getHand() const { return m_hand; }
+  std::list<std::vector<card>> getHand() const { return m_hand; }
   int getPurse() const { return m_purse; }
   void dumpHand() const;
 
@@ -24,6 +25,7 @@ public:
   void clearHand() { m_hand.clear(); }
   void addMoney(int amt) { m_purse += amt; }
   void removeMoney(int amt) { m_purse -= amt; }
+  void addHand() { m_hand.push_back({}); }
 
   virtual char makeMove() const { return 's'; }
   virtual char makeMove(card &d) const { return 's'; }
@@ -33,7 +35,7 @@ public:
 private:
   std::string m_name;
   int m_purse;
-  std::vector<card> m_hand;
+  std::list<std::vector<card>> m_hand;
 };
 
 class dealer : public player {
