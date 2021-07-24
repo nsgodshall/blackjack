@@ -22,7 +22,7 @@ public:
 
   // mutators
   bool addCard(card c);
-  void clearHand() { m_hand.clear(); }
+  void clearHand();
   void addMoney(int amt) { m_purse += amt; }
   void removeMoney(int amt) { m_purse -= amt; }
   void addHand() { m_hand.push_back({}); }

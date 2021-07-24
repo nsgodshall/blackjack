@@ -20,6 +20,13 @@ bool player::addCard(card c) {
   return true;
 }
 
+void player::clearHand() {
+  for (std::vector<card> v : m_hand){
+    v.clear();
+  } 
+  std::cout << std::endl << m_hand.size() << std::endl;
+}
+
 player::~player() {}
 
 void player::dumpHand() const {
