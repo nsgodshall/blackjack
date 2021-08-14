@@ -16,13 +16,13 @@ public:
 
   // accessors
   std::string getName() const { return m_name; }
-  std::list<std::vector<card>> getHand() const { return m_hand; }
+  std::vector<std::vector<card>> getHand() const { return m_hand; }
   int getPurse() const { return m_purse; }
   void dumpHand() const;
 
   // mutators
   bool addCard(card c);
-  void clearHand();
+  void clearHand() { m_hand.clear(); }
   void addMoney(int amt) { m_purse += amt; }
   void removeMoney(int amt) { m_purse -= amt; }
   void addHand() { m_hand.push_back({}); }
@@ -35,7 +35,7 @@ public:
 private:
   std::string m_name;
   int m_purse;
-  std::list<std::vector<card>> m_hand;
+  std::vector<std::vector<card>> m_hand;
 };
 
 class dealer : public player {
