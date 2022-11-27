@@ -5,30 +5,39 @@ game::game(int nStandard, int nHuman, int nRandom, int nNaive)
   // initialize all of the players
   std::string namePlaceHolder;
 
-  for (int i = 0; i < nStandard; i++) {
+  // Query program user for names, add them to name vector...
+  // ... for all standard players
+  for  (int i = 0; i < nStandard; i++) {
     std::cout << "Enter the name of (Standard) player "
               << m_allPlayers.size() + 1 << ": ";
     std::cin >> namePlaceHolder;
     m_allPlayers.push_back(new standardPlayer(namePlaceHolder));
   }
+
+  // ... for all human players
   for (int i = 0; i < nHuman; i++) {
     std::cout << "Enter the name of (human) player " << m_allPlayers.size() + 1
               << ": ";
     std::cin >> namePlaceHolder;
     m_allPlayers.push_back(new humanPlayer(namePlaceHolder));
   }
+
+  // ... for all random players
   for (int i = 0; i < nRandom; i++) {
     std::cout << "Enter the name of (random) player " << m_allPlayers.size() + 1
               << ": ";
     std::cin >> namePlaceHolder;
     m_allPlayers.push_back(new randomPlayer(namePlaceHolder));
   }
+
+  // ... for all naive players
   for (int i = 0; i < nNaive; i++) {
     std::cout << "Enter the name of (naive) player " << m_allPlayers.size() + 1
               << ": ";
     std::cin >> namePlaceHolder;
     m_allPlayers.push_back(new naivePlayer(namePlaceHolder));
   }
+
   // shuffle the deck
   m_gameDeck.shuffleDeck();
 }
@@ -55,10 +64,15 @@ void game::play() {
   //std::cerr << m_allPlayers[0]->getPurse() << " " << m_allPlayers[1]->getPurse();
 }
 
+
 void game::manageRound() {
+
+  // If the current deck size is smaller than the set minimum deck size, create a new deck
   if (m_gameDeck.size() < MIN_DECK_SIZE) {
     m_gameDeck = deck(m_shoeSize);
   }
+  
+  // conduct the four stages of a round
   setWagers();
   deal();
   playRound();
@@ -73,25 +87,9 @@ void game::setWagers() {
   }
 }
 
-void game::deal() {
-  card c;
-  m_dealer.clearHand();
-  for (int i = 0; i < 2; i++) {
-    m_gameDeck.drawCard(c);
-    m_dealer.addCard(c);
-  }
-
-  for (player *p : m_allPlayers) {
-    p->clearHand();
-    for (int j = 0; j < 2; j++) {
-      m_gameDeck.drawCard(c);
-      p->addCard(c);
-    }
-  }
-}
-
 void game::playRound() {
   card c;
+  
   for (player *p : m_allPlayers) {
         //check if player can split
     if (p->getHand().front().val == p->getHand().back().val && p->splitQuery()){
