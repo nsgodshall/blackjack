@@ -89,12 +89,14 @@ void game::setWagers() {
 
 void game::playRound() {
   card c;
-  
+
   for (player *p : m_allPlayers) {
-        //check if player can split
+        // check if player can split
+        // if so
     if (p->getHand().front().val == p->getHand().back().val && p->splitQuery()){
       std::cerr << "split!" << std::endl;
-      std::vector<card> oldHand = p->getHand();
+      // std::vector<card> oldHand = p->getHand();
+      p->m_splitHand
       p->clearHand();
       p->addCard(oldHand.front());
       m_gameDeck.drawCard(c);

@@ -7,6 +7,7 @@
 
 const int MIN_BET = 10;
 const int MAX_BET = 200;
+const int DEFAULT_PURSE = 1000;
 
 int getCardVal(const card &c);
 

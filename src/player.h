@@ -9,21 +9,26 @@
 
 class player {
 public:
+  // Initialize a player with a user defined name and and default purse size
   player(std::string name);
+  // initialize a player with a user defined purse
   player(std::string, int purse);
+  // destructor <Does this need to exist?>
   ~player();
 
-  // accessors
+  // ACCESSORS
   std::string getName() const { return m_name; }
   std::vector<card> getHand() const { return m_hand; }
   int getPurse() const { return m_purse; }
   void dumpHand() const;
 
-  // mutators
+  // MUTATORS
   bool addCard(card c);
   void clearHand() { m_hand.clear(); }
   void addMoney(int amt) { m_purse += amt; }
   void removeMoney(int amt) { m_purse -= amt; }
+  // Move the back element of original hand to be the first element of second hand.
+  void splitHand();
 
   virtual char makeMove() const { return 's'; }
   virtual char makeMove(card &d) const { return 's'; }
@@ -34,6 +39,7 @@ private:
   std::string m_name;
   int m_purse;
   std::vector<card> m_hand;
+  std::vector<card> m_splitHand;
 };
 
 class dealer : public player {

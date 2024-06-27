@@ -14,14 +14,19 @@ const int DEFAULT_SHOE_SIZE = 6;
 
 class game {
 public:
+  // Initialize a game object wihth a default shoe size = 1. Fills the m_allPlayers vector
   game(int nStandard, int nHuman, int nRandom, int nNaive);
-  game(int numPlaters, int shoeSize);
+  game(int numPlayers, int shoeSize);
   void play();
 
 private:
+  // Clear the dealers hand of any cards, and add two cards to dealers hand, then deal two cards to each player
   void deal();
+  // Query each player for what amount to bet
   void setWagers();
+  // Superfunction which manages a round from collecting wagers, dealing, querying players for moves, and settling balances after completion of round
   void manageRound();
+  // Query each player to hit or to stay
   void playRound();
   void playHand(player* p);
   

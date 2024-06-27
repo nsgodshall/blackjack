@@ -2,6 +2,7 @@
 #include <cassert>
 
 #include "game.h"
+#include "utilities.h"
 
 void testHandVal(){
   card c;

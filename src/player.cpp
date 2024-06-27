@@ -5,7 +5,7 @@
 
 #include "player.h"
 
-player::player(std::string name) : m_name(name), m_purse(1000) {}
+player::player(std::string name) : m_name(name), m_purse(DEFAULT_PURSE) {}
 
 player::player(std::string name, int purse) : m_name(name), m_purse(purse) {}
 
@@ -27,6 +27,11 @@ int player::makeWager() {
   int wager = MIN_BET;
   m_purse -= wager;
   return wager;
+}
+
+void player::splitHand() {
+  m_splitHand[0] = m_hand.back();
+  m_hand.pop_back();
 }
 
 // DEALER IMPLEMENTATIONS
