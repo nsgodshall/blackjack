@@ -6,7 +6,7 @@ game::game(int nStandard, int nHuman, int nRandom, int nNaive)
   std::string namePlaceHolder;
 
   // Query program user for names, add them to name vector...
-  // ... for all standard players
+  // for all standard players
   for  (int i = 0; i < nStandard; i++) {
     std::cout << "Enter the name of (Standard) player "
               << m_allPlayers.size() + 1 << ": ";
@@ -79,6 +79,23 @@ void game::manageRound() {
   settleUp();
 }
 
+void game::deal() {
+	card c;
+	m_dealer.clearHand();
+	for (int i = 0; i < 2; i++) {
+		m_gameDeck.drawCard(c);
+		m_dealer.addCard(c);
+	}
+
+	for (player* p : m_allPlayers) {
+		p->clearHand();
+		for (int j = 0; j < 2; j++) {
+			m_gameDeck.drawCard(c);
+			p->addCard(c);
+		}
+	}
+}
+
 void game::setWagers() {
   for (player *p : m_allPlayers) {
     int wager = p->makeWager();
@@ -95,7 +112,7 @@ void game::playRound() {
         // if so
     if (p->getHand().front().val == p->getHand().back().val && p->splitQuery()){
       std::cerr << "split!" << std::endl;
-      // std::vector<card> oldHand = p->getHand();
+      std::vector<card> oldHand = p->getHand();
       p->splitHand();
       p->clearHand();
       p->addCard(oldHand.front());
