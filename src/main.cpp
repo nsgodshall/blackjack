@@ -2,7 +2,10 @@
 #include <cassert>
 
 #include "game.h"
+#include "hand.h"
 #include "utilities.h"
+
+#include "test.h"
 
 void testHandVal(){
   card c;
@@ -25,7 +28,14 @@ void testHandVal(){
   assert(getHandVal(p.getHand()) == 21);
 }
 
+void testHandClass(){
+  test_hand_class();
+  std::cout << "all tests passed." << std::endl;
+}
+
 int main() {
-  game g1(0,3,0,0);
-  g1.play();
+
+  testHandClass();
+  // game g1(0,3,0,0);
+  // g1.play();
 }
