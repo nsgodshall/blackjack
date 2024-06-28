@@ -7,15 +7,24 @@
 
 class hand{
 public:
-    hand() {;}
+    hand() : m_handSize(0) {;}
 
+
+// ACCESSORS
+    int getNumCards() const;
+    std::vector<card *> getCardsInHand() const;
+    card* getLastCard() const;
+    int getHandVal() const;
+    
+// MUTATORS
     card* addCardToHand(card* addedCard);
-
-
-
+    int clearHand();
 
 
 private:
+    int m_handSize;
+
+
     std::vector<card *> m_hand;
 
 };
