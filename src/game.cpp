@@ -96,7 +96,7 @@ void game::playRound() {
     if (p->getHand().front().val == p->getHand().back().val && p->splitQuery()){
       std::cerr << "split!" << std::endl;
       // std::vector<card> oldHand = p->getHand();
-      p->m_splitHand
+      p->splitHand();
       p->clearHand();
       p->addCard(oldHand.front());
       m_gameDeck.drawCard(c);
