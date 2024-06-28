@@ -10,7 +10,7 @@
         return m_hand;
     }
     card* hand::getLastCard() const{
-        return nullptr;
+        return m_hand.back();
     }
     int hand::getHandVal() const{
         return 0;
