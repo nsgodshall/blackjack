@@ -139,7 +139,7 @@ void game::playHand(player* p){
     m_gameDeck.drawCard(c);
     p->addCard(c);
     std::cout << "Card Dealt "; 
-    p->dumpHand();
+    p->dumpLastCard();
     std::cout << std::endl;
     std::cout << "New Hand Value: " << getHandVal(p->getHand());
     if (getHandVal(p->getHand()) == -1) {

@@ -20,6 +20,10 @@ void player::dumpHand() const {
   for (int i = 0; i < m_hand.size() - 1; i++) {
     std::cerr << m_hand[i].val << m_hand[i].suit << ", ";
   }
+  dumpLastCard();
+}
+
+void player::dumpLastCard() const {
   std::cout << m_hand.back().val << m_hand.back().suit;
 }
 

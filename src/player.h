@@ -21,6 +21,7 @@ public:
   std::vector<card> getHand() const { return m_hand; }
   int getPurse() const { return m_purse; }
   void dumpHand() const;
+  void dumpLastCard() const;
 
   // MUTATORS
   bool addCard(card c);
