@@ -293,8 +293,8 @@ void game::settleUpVerbose() {
     std::cerr << std::endl << "WINNERS: " << std::endl;
     for (player *w : winners) {
       w->addMoney(2 * m_wagers[w]);
-      std::cerr << w->getName() << ": " << w->getPurse() - m_wagers[w]
-                << " ----> " << w->getPurse() << std::endl;
+      std::cerr << w->getName() << " $" << w->getPurse() - m_wagers[w]
+                << " ----> $" << w->getPurse() << std::endl;
     }             
   }
 

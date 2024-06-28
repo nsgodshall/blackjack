@@ -20,7 +20,7 @@ void player::dumpHand() const {
   for (int i = 0; i < m_hand.size() - 1; i++) {
     std::cerr << m_hand[i].val << m_hand[i].suit << ", ";
   }
-  std::cout << m_hand.back().suit << m_hand.back().val;
+  std::cout << m_hand.back().val << m_hand.back().suit;
 }
 
 int player::makeWager() {
@@ -61,10 +61,10 @@ char humanPlayer::makeMove(card &d) const {
 int humanPlayer::makeWager() {
   int wager = -1;
   while (wager < MIN_BET || wager > MAX_BET) {
-    std::cout << std::endl << "Enter Wager amount purse left/min wager/max wager (";
+    std::cout << std::endl << "Enter Wager (purse left/min wager/max wager): ";
     std::cout << "$" << getPurse() << "/";
     std::cout << "$" << MIN_BET << "/";
-    std::cout << "$" << MAX_BET << ")" << std::endl;
+    std::cout << "$" << MAX_BET << std::endl;
 
     std::cin >> wager;
   }
