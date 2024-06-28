@@ -4,7 +4,7 @@
 
 // ACCESSORS
     int hand::getNumCards() const{
-        return 0;
+        return m_handSize;
     }
     std::vector<card *> hand::getCardsInHand() const{
         std::vector<card *> v;
@@ -21,6 +21,7 @@
 // MUTATORS
     card* hand::addCardToHand(card* addedCard){
         m_hand.push_back(addedCard);
+        m_handSize++;
         return addedCard;
     }
     int hand::clearHand(){return 0;}
