@@ -138,6 +138,10 @@ void game::playHand(player* p){
   while (p->makeMove(m_dealer.getHand().back()) == 'h') {
     m_gameDeck.drawCard(c);
     p->addCard(c);
+    std::cout << "Card Dealt "; 
+    p->dumpHand();
+    std::cout << std::endl;
+    std::cout << "New Hand Value: " << getHandVal(p->getHand());
     if (getHandVal(p->getHand()) == -1) {
       break;
     }
@@ -206,7 +210,7 @@ void game::playRoundVerbose() {
     std::cout << std::endl << p->getName() << "'s turn: " << std::endl;
     std::cout << "HAND: ";
     p->dumpHand();
-    std::cerr << " (Val is: " << getHandVal(p->getHand()) << ")";
+    std::cout << " (Val is: " << getHandVal(p->getHand()) << ")";
     std::cout << std::endl;
     if (p->getHand().front().val == p->getHand().back().val && p->splitQuery()){
       std::cerr << "split!" << std::endl;
@@ -240,21 +244,21 @@ void game::playRoundVerbose() {
 void game::playHandVerbose(player* p){
   card c;
   while (p->makeMove(m_dealer.getHand().back()) == 'h') {
-  std::cout << "HIT!" << std::endl;
-  std::cout << "HAND: ";
-  m_gameDeck.drawCard(c);
-  p->addCard(c);
-  p->dumpHand();
-  std::cerr << " (Val is: " << getHandVal(p->getHand()) << " )";
-  std::cout << std::endl;
-  if (getHandVal(p->getHand()) == -1) {
-    std::cout << "BUST!" << std::endl;
-    break;
+    std::cout << "HIT!" << std::endl;
+    std::cout << "HAND: ";
+    m_gameDeck.drawCard(c);
+    p->addCard(c);
+    p->dumpHand();
+    std::cerr << " (Val is: " << getHandVal(p->getHand()) << " )";
+    std::cout << std::endl;
+    if (getHandVal(p->getHand()) == -1) {
+      std::cout << "BUST!" << std::endl;
+      break;
+    }
   }
-}
-if (getHandVal(p->getHand()) != -1) {
-  std::cout << "STAY!" << std::endl;
-}
+  if (getHandVal(p->getHand()) != -1) {
+    std::cout << "STAY!" << std::endl;
+  }
 }
 
 void game::settleUpVerbose() {
@@ -284,19 +288,22 @@ void game::settleUpVerbose() {
         ties.push_back(p);
     }
   }
-  std::cerr << "WINNERS: " << std::endl;
-  for (player *w : winners) {
-    w->addMoney(2 * m_wagers[w]);
-    std::cerr << w->getName() << ": " << w->getPurse() - m_wagers[w]
-              << " ----> " << w->getPurse() << std::endl;
+
+  if (winners.size() != 0){
+    std::cerr << std::endl << "WINNERS: " << std::endl;
+    for (player *w : winners) {
+      w->addMoney(2 * m_wagers[w]);
+      std::cerr << w->getName() << ": " << w->getPurse() - m_wagers[w]
+                << " ----> " << w->getPurse() << std::endl;
+    }             
   }
-  std::cerr << "LOSERS: " << std::endl;
+
+  std::cerr << std::endl << "LOSERS: " << std::endl;
   for (player *l : losers) {
     std::cerr << l->getName() << ": " << l->getPurse() + m_wagers[l]
               << " ----> " << l->getPurse() << std::endl;
   }
-  std::cerr << std::endl;
-  std::cerr << "TIES: " << std::endl;
+  std::cerr << std::endl << "TIES: " << std::endl;
   for (player *t : ties) {
     t->addMoney(m_wagers[t]);
     std::cerr << t->getName() << ": " << t->getPurse() << " ----> "

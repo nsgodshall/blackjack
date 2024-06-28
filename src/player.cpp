@@ -18,7 +18,7 @@ player::~player() {}
 
 void player::dumpHand() const {
   for (int i = 0; i < m_hand.size() - 1; i++) {
-    std::cerr << m_hand[i].suit << m_hand[i].val << ", ";
+    std::cerr << m_hand[i].val << m_hand[i].suit << ", ";
   }
   std::cout << m_hand.back().suit << m_hand.back().val;
 }
@@ -52,7 +52,7 @@ humanPlayer::humanPlayer(std::string name, int purse) : player(name, purse) {}
 char humanPlayer::makeMove(card &d) const {
   char i = 'x';
   while (tolower(i) != 's' && tolower(i) != 'h') {
-    std::cout << std::endl << "CHOOSE MOVE: ";
+    std::cout << std::endl << "(s)tay or (h)it? ";
     std::cin >> i;
   }
   return tolower(i);
@@ -61,7 +61,11 @@ char humanPlayer::makeMove(card &d) const {
 int humanPlayer::makeWager() {
   int wager = -1;
   while (wager < MIN_BET || wager > MAX_BET) {
-    std::cout << std::endl << "bet: ";
+    std::cout << std::endl << "Enter Wager amount purse left/min wager/max wager (";
+    std::cout << "$" << getPurse() << "/";
+    std::cout << "$" << MIN_BET << "/";
+    std::cout << "$" << MAX_BET << ")" << std::endl;
+
     std::cin >> wager;
   }
   removeMoney(wager);
