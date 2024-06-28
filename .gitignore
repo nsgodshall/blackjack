@@ -1,3 +1,4 @@
-bin/main
-src/.vscode/
+.vscode/*
+bin/*
+src/.vscode/*
 src/main.cpp
