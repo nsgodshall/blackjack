@@ -2,3 +2,5 @@
 bin/*
 src/.vscode/*
 src/main.cpp
+src/test.cpp
+src/test.h
