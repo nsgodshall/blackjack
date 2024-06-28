@@ -7,9 +7,7 @@
         return m_handSize;
     }
     std::vector<card *> hand::getCardsInHand() const{
-        std::vector<card *> v;
-        v.push_back(nullptr);
-        return v;
+        return m_hand;
     }
     card* hand::getLastCard() const{
         return nullptr;
