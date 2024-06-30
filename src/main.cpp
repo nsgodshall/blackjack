@@ -18,14 +18,14 @@ void testHandVal(){
   c.val = 'A';
   p.addCard(c);
 
-  assert(getHandVal(p.getHand()) == 0);
+  assert(calcHandVal(p.getHand()) == 0);
   c.val = '2';
   p.addCard(c);
-  assert(getHandVal(p.getHand()) == 13);
+  assert(calcHandVal(p.getHand()) == 13);
 
   c.val = '8';
   p.addCard(c);
-  assert(getHandVal(p.getHand()) == 21);
+  assert(calcHandVal(p.getHand()) == 21);
 }
 
 void testHandClass(){

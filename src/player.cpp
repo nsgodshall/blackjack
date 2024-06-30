@@ -43,7 +43,7 @@ void player::splitHand() {
 dealer::dealer() : player("dealer") {}
 
 char dealer::makeMove() const {
-  if (getHandVal(getHand()) >= 17 || getHandVal(getHand()) == -1)
+  if (calcHandVal(getHand()) >= 17 || calcHandVal(getHand()) == -1)
     return 's';
   return 'h';
 }
@@ -122,10 +122,10 @@ standardPlayer::standardPlayer(std::string name, int purse)
 char standardPlayer::makeMove(card &d) const {
   // If the dealer is showing
   if (getCardVal(d) == 10 || getCardVal(d) == 0) {
-    if (getHandVal(getHand()) >= 17 || getHandVal(getHand()) == -1)
+    if (calcHandVal(getHand()) >= 17 || calcHandVal(getHand()) == -1)
       return 's';
   } else {
-    if (getHandVal(getHand()) >= 12 || getHandVal(getHand()) == -1)
+    if (calcHandVal(getHand()) >= 12 || calcHandVal(getHand()) == -1)
       return 's';
   }
   return 'h';
@@ -148,7 +148,7 @@ naivePlayer::naivePlayer(std::string name) : player(name) {}
 naivePlayer::naivePlayer(std::string name, int purse) : player(name, purse) {}
 
 char naivePlayer::makeMove(card &d) const {
-  if (getHandVal(getHand()) >= 17 || getHandVal(getHand()) == -1)
+  if (calcHandVal(getHand()) >= 17 || calcHandVal(getHand()) == -1)
     return 's';
   return 'h';
 }

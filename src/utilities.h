@@ -11,6 +11,7 @@ const int DEFAULT_PURSE = 1000;
 
 int getCardVal(const card &c);
 
-int getHandVal(const std::vector<card> &hand);
+int calcHandVal(const std::vector<card> &hand);
 
+int calcHandVal(const std::vector<card *> &hand);
 #endif // UTILITIES_INCLUDED

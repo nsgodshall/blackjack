@@ -1,5 +1,6 @@
 #include "hand.h"
 #include "player.h"
+#include "utilities.h"
 
 
 // ACCESSORS
@@ -13,7 +14,7 @@
         return m_hand.back();
     }
     int hand::getHandVal() const{
-        return 0;
+        return calcHandVal(m_hand);
     }
     
 // MUTATORS

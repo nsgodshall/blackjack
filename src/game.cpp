@@ -141,8 +141,8 @@ void game::playHand(player* p){
     std::cout << "Card Dealt "; 
     p->dumpLastCard();
     std::cout << std::endl;
-    std::cout << "New Hand Value: " << getHandVal(p->getHand());
-    if (getHandVal(p->getHand()) == -1) {
+    std::cout << "New Hand Value: " << calcHandVal(p->getHand());
+    if (calcHandVal(p->getHand()) == -1) {
       break;
     }
   }
@@ -152,19 +152,19 @@ void game::settleUp() {
   std::vector<player *> winners;
   std::vector<player *> losers;
   std::vector<player *> ties;
-  int dealerVal = getHandVal(m_dealer.getHand());
+  int dealerVal = calcHandVal(m_dealer.getHand());
 
   // dealer busted
   if (dealerVal == -1) {
     for (player *p : m_allPlayers) {
       // If player has not busted but the dealer has, they are a winner
-      if (getHandVal(p->getHand()) != -1)
+      if (calcHandVal(p->getHand()) != -1)
         p->addMoney(2 * m_wagers[p]);
       // If the player busts, they are a loser
     }
   } else {
     for (player *p : m_allPlayers) {
-      int pHand = getHandVal(p->getHand());
+      int pHand = calcHandVal(p->getHand());
       if (pHand > dealerVal)
         p->addMoney(2 * m_wagers[p]);
       else if (pHand == dealerVal)
@@ -210,7 +210,7 @@ void game::playRoundVerbose() {
     std::cout << std::endl << p->getName() << "'s turn: " << std::endl;
     std::cout << "HAND: ";
     p->dumpHand();
-    std::cout << " (Val is: " << getHandVal(p->getHand()) << ")";
+    std::cout << " (Val is: " << calcHandVal(p->getHand()) << ")";
     std::cout << std::endl;
     if (p->getHand().front().val == p->getHand().back().val && p->splitQuery()){
       std::cerr << "split!" << std::endl;
@@ -249,14 +249,14 @@ void game::playHandVerbose(player* p){
     m_gameDeck.drawCard(c);
     p->addCard(c);
     p->dumpHand();
-    std::cerr << " (Val is: " << getHandVal(p->getHand()) << " )";
+    std::cerr << " (Val is: " << calcHandVal(p->getHand()) << " )";
     std::cout << std::endl;
-    if (getHandVal(p->getHand()) == -1) {
+    if (calcHandVal(p->getHand()) == -1) {
       std::cout << "BUST!" << std::endl;
       break;
     }
   }
-  if (getHandVal(p->getHand()) != -1) {
+  if (calcHandVal(p->getHand()) != -1) {
     std::cout << "STAY!" << std::endl;
   }
 }
@@ -265,19 +265,19 @@ void game::settleUpVerbose() {
   std::vector<player *> winners;
   std::vector<player *> losers;
   std::vector<player *> ties;
-  int dealerVal = getHandVal(m_dealer.getHand());
+  int dealerVal = calcHandVal(m_dealer.getHand());
 
   // dealer busted
   if (dealerVal == -1) {
     for (player *p : m_allPlayers) {
-      if (getHandVal(p->getHand()) != -1)
+      if (calcHandVal(p->getHand()) != -1)
         winners.push_back(p);
       else
         losers.push_back(p);
     }
   } else {
     for (player *p : m_allPlayers) {
-      int pHand = getHandVal(p->getHand());
+      int pHand = calcHandVal(p->getHand());
       if (pHand == -1)
         losers.push_back(p);
       else if (pHand > dealerVal)
