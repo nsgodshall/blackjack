@@ -2,9 +2,9 @@
 #define DECK_INCLUDED
 
 #include <algorithm>
-#include <ctime>
 #include <iostream>
 #include <vector>
+#include <random>
 
 #include "card.h"
 

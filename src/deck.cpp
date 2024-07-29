@@ -1,8 +1,6 @@
 #include "deck.h"
 
 deck::deck() : m_nCards(0) {
-  std::srand(unsigned(std::time(0)));
-
   std::vector<char> suits = {'S', 'C', 'H', 'D'};
   std::vector<char> cardValues = {'2', '3', '4', '5', '6', '7', '8',
                                   '9', 'T', 'J', 'Q', 'K', 'A'};
@@ -19,8 +17,6 @@ deck::deck() : m_nCards(0) {
 }
 
 deck::deck(int shoeSize) : m_nCards(0) {
-  std::srand(unsigned(std::time(0)));
-
   std::vector<char> suits = {'S', 'C', 'H', 'D'};
   std::vector<char> cardValues = {'2', '3', '4', '5', '6', '7', '8',
                                   '9', 'T', 'J', 'Q', 'K', 'A'};
@@ -38,7 +34,9 @@ deck::deck(int shoeSize) : m_nCards(0) {
 }
 
 bool deck::shuffleDeck() {
-  std::random_shuffle(m_cards.begin(), m_cards.end());
+  std::random_device rd;
+  std::mt19937 g(rd());
+  std::shuffle(m_cards.begin(), m_cards.end(), g);
   return 1;
 }
 
